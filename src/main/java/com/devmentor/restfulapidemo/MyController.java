@@ -30,7 +30,6 @@ public class MyController {
     @GetMapping("/book-course")
     public String bookCourse() {
         String content = event.getContent("allen");
-
         return content;
     }
 
