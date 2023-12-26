@@ -12,5 +12,57 @@ public class Event {
     private Long id;
     @Column(name = "name") private String name;
     @Column(name = "trigger_time") private Date triggerTime;
-    @Column(name = "create_at") private Date createdAt;
+    @Column(name = "created_at") private Date createdAt;
+
+    // required for JPA
+    public Event() {
+    }
+
+    public Event(String name, Date triggerTime, Date createdAt) {
+        this.name = name;
+        this.triggerTime = triggerTime;
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getTriggerTime() {
+        return triggerTime;
+    }
+
+    public void setTriggerTime(Date triggerTime) {
+        this.triggerTime = triggerTime;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", triggerTime=" + triggerTime +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
