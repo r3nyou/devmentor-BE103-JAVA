@@ -12,9 +12,6 @@ public class MyController {
     @Autowired
     private Event event;
 
-    @Value("${bookCourse.message}")
-    private String envMessage;
-
     @GetMapping("/hello")
     public String hello() {
         return "hello";
