@@ -22,7 +22,7 @@ public class RestfulApiDemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(EventDao eventDao) {
 		return runner -> {
-			createEvent(eventDao);
+//			createEvent(eventDao);
 		};
 	}
 

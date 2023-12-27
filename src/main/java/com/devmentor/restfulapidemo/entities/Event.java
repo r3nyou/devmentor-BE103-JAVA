@@ -1,5 +1,6 @@
 package com.devmentor.restfulapidemo.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -10,9 +11,17 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name") private String name;
-    @Column(name = "trigger_time") private Date triggerTime;
-    @Column(name = "created_at") private Date createdAt;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "trigger_time")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date triggerTime;
+
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "created_at")
+    private Date createdAt;
 
     // required for JPA
     public Event() {
