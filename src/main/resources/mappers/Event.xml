@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.devmentor.restfulapidemo.dao.EventDao" >
+    <select id="get" parameterType="int" resultType="com.devmentor.restfulapidemo.entities.Event">
+        SELECT * FROM events WHERE id=#{eventId};
+    </select>
+
+    <insert id="create" parameterType="com.devmentor.restfulapidemo.entities.Event">
+        INSERT INTO events (name, trigger_time, created_at)
+        VALUES (#{name}, #{triggerTime}, #{createdAt});
+    </insert>
+
+    <resultMap id="eventNotifyMessageMap" type="com.devmentor.restfulapidemo.entities.Event">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+        <result property="triggerTime" column="trigger_time"/>
+        <result property="createdAt" column="created_at"/>
+        <collection property="eventNotifyMessages" ofType="com.devmentor.restfulapidemo.entities.EventNotifyMessage">
+            <result property="id" column="id"/>
+            <result property="eventId" column="event_id"/>
+            <result property="notifyChannelId" column="notifyChannelId"/>
+            <result property="content" column="content"/>
+        </collection>
+    </resultMap>
+    <select id="getEventNotifyMessage" parameterType="int" resultMap="eventNotifyMessageMap">
+        SELECT
+            events.id,
+            events.name,
+            events.trigger_time,
+            events.created_at,
+            event_notify_messages.event_id,
+            event_notify_messages.notify_channel_id,
+            event_notify_messages.content
+        FROM events
+        LEFT JOIN event_notify_messages ON events.id=event_notify_messages.event_id
+        WHERE events.id=#{eventId}
+    </select>
+</mapper>
